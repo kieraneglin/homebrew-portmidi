@@ -22,13 +22,16 @@ class Portmidi < Formula
   depends_on "cmake" => :build
 
   # Do not build pmjni.
-  patch do
-    url "https://sources.debian.org/data/main/p/portmidi/1:217-6/debian/patches/13-disablejni.patch"
-    sha256 "c11ce1e8fe620d5eb850a9f1ca56506f708e37d4390f1e7edb165544f717749e"
-  end
+#   patch do
+#     url "https://sources.debian.org/data/main/p/portmidi/1:217-6/debian/patches/13-disablejni.patch"
+#     sha256 "c11ce1e8fe620d5eb850a9f1ca56506f708e37d4390f1e7edb165544f717749e"
+#   end
 
   def install
+    puts '*' * 20
     puts MacOS.sdk_path
+    puts prefix
+    puts '*' * 20
     ENV["SDKROOT"] = MacOS.sdk_path if MacOS.version == :sierra || MacOS.version == :el_capitan
 
     inreplace "pm_mac/Makefile.osx", "PF=/usr/local", "PF=#{prefix}"
